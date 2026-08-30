@@ -13,15 +13,16 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("*")
+                registry.addMapping("/**") // Sabhi endpoints (/movies, /users, etc.) cover karega
+                        .allowedOrigins(
+                                "https://book-my-show-frontend-liart.vercel.app",
+                                "http://localhost:5500",
+                                "http://127.0.0.1:5500"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
-
-
         };
-
     }
-
 }
