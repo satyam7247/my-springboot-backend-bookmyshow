@@ -46,6 +46,11 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getByLanguage(language));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie){
+        return ResponseEntity.ok(movieService.updateMovie(id, movie));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
         movieService.deleteMovie(id);

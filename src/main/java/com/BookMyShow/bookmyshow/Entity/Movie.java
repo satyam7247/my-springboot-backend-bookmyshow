@@ -26,7 +26,7 @@ public class Movie {
     private String genre;
     private String language;
     private Integer durationMinutes;
-    private Double tating;
+    private Double rating;
     private LocalDate releaseDate;
     private String posterUrl;
 

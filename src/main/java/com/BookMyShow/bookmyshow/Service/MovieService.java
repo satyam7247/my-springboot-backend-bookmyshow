@@ -42,7 +42,21 @@ public class MovieService {
         return movieRepositry.findByLanguage(language);
     }
 
+    public Movie updateMovie(Long id, Movie updatedMovie){
+        Movie movie = getMovieById(id); // agar id nahi mili to already RuntimeException throw hoga
 
-    //update movie apn ko bana na he.
-    //delete movie apn ko bana na he.
+        movie.setTitle(updatedMovie.getTitle());
+        movie.setDescription(updatedMovie.getDescription());
+        movie.setGenre(updatedMovie.getGenre());
+        movie.setLanguage(updatedMovie.getLanguage());
+        movie.setDurationMinutes(updatedMovie.getDurationMinutes());
+        movie.setRating(updatedMovie.getRating());
+        movie.setReleaseDate(updatedMovie.getReleaseDate());
+        movie.setPosterUrl(updatedMovie.getPosterUrl());
+
+        return movieRepositry.save(movie);
+    }
+
+
+
 }
