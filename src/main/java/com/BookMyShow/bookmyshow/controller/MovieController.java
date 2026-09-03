@@ -56,4 +56,15 @@ public class MovieController {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
+
+    /* Like endpoints - movie like count backend me persist hota hai (sab users/devices ke liye same total) */
+    @PostMapping("/{id}/like")
+    public ResponseEntity<Movie> likeMovie(@PathVariable Long id){
+        return ResponseEntity.ok(movieService.incrementLike(id));
+    }
+
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity<Movie> unlikeMovie(@PathVariable Long id){
+        return ResponseEntity.ok(movieService.decrementLike(id));
+    }
 }

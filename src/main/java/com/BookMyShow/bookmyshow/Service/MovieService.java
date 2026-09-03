@@ -57,6 +57,19 @@ public class MovieService {
         return movieRepositry.save(movie);
     }
 
+    /* Like count +1 - null safe (purane records me likeCount null ho sakta hai) */
+    public Movie incrementLike(Long id){
+        Movie movie = getMovieById(id);
+        movie.setLikeCount((movie.getLikeCount() == null ? 0 : movie.getLikeCount()) + 1);
+        return movieRepositry.save(movie);
+    }
 
+    /* Like count -1 - 0 se niche kabhi nahi jayega */
+    public Movie decrementLike(Long id){
+        Movie movie = getMovieById(id);
+        int current = (movie.getLikeCount() == null ? 0 : movie.getLikeCount());
+        movie.setLikeCount(Math.max(current - 1, 0));
+        return movieRepositry.save(movie);
+    }
 
 }

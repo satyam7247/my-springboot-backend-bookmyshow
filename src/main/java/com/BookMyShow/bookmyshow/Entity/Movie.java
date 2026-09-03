@@ -30,4 +30,9 @@ public class Movie {
     private LocalDate releaseDate;
     private String posterUrl;
 
+    /* Total likes - sab users ke likes ka count (frontend me movie.likeCount se padha jata hai) */
+    @Builder.Default
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private Integer likeCount = 0;
+
 }
