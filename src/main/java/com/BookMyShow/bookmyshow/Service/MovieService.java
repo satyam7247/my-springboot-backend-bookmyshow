@@ -13,6 +13,8 @@ public class MovieService {
     private final MovieRepositry movieRepositry;
 
     public Movie addmovie(Movie movie){
+        // Frontend likeCount nahi bhejta - null aaye to 0 se start karo (not-null constraint fail na ho)
+        if (movie.getLikeCount() == null) movie.setLikeCount(0);
         return movieRepositry.save(movie);
     }
 
