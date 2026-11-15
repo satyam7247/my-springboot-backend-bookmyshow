@@ -37,7 +37,18 @@ public class Booking {
             inverseJoinColumns = @JoinColumn(name = "seat_id"))
     private List<Seat> seats;
 
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookingFoodItem> foodItems;
+
+    private String foodDeliveryTime;
+
     private  Double totalPrice;
+
+    @Column(name = "razorpay_payment_id", unique = true)
+    private String razorpayPaymentId;
+
+    @Column(name = "razorpay_refund_id", unique = true)
+    private String razorpayRefundId;
 
     @Enumerated(EnumType.STRING)
     private BookingStatus status;

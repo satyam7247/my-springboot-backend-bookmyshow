@@ -5,6 +5,7 @@ import com.BookMyShow.bookmyshow.Entity.Screen;
 import com.BookMyShow.bookmyshow.Entity.Show;
 import com.BookMyShow.bookmyshow.Repositry.ShowRepositry;
 import com.BookMyShow.bookmyshow.dto.ShowRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,12 @@ public class ShowService {
     public Show getShowById(Long id){
         return showRepositry.findById(id)
                 .orElseThrow(()-> new RuntimeException("Show not found id "+id));
+    }
+
+    @Transactional
+    public Show getShowForBooking(Long id) {
+        return showRepositry.findByIdForBooking(id)
+                .orElseThrow(() -> new RuntimeException("Show not found id " + id));
     }
 
     public void deleteShow(Long id){

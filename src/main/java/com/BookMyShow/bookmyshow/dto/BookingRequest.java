@@ -15,4 +15,6 @@ public class BookingRequest {
     private Long userId;
     private Long showId;
     private List<Long> seatIds;
+    private List<FoodItemRequest> foodItems;
+    private String foodDeliveryTime;
 }
