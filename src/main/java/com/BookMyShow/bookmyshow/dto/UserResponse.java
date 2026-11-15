@@ -14,6 +14,7 @@ public class UserResponse {
     private final String email;
     private final String role;
     private final String phone;
+    private final String city;
     private final LocalDateTime createAt;
 
     public static UserResponse from(UserEntity user) {
@@ -23,6 +24,7 @@ public class UserResponse {
                 user.getEmail(),
                 user.getRole(),
                 user.getPhone(),
+                user.getCity(),
                 user.getCreateAt()
         );
     }

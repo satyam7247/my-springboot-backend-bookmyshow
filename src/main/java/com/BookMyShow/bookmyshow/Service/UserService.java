@@ -41,6 +41,9 @@ public class UserService {
         if (request.getPhone() != null && request.getPhone().length() > 30) {
             throw new IllegalArgumentException("Phone number exceeds the allowed length");
         }
+        if (request.getCity() != null && request.getCity().length() > 120) {
+            throw new IllegalArgumentException("City exceeds the allowed length");
+        }
         if (userRepositry.existsByEmailIgnoreCase(email)) {
             throw new IllegalArgumentException("An account already exists for this email");
         }
@@ -50,6 +53,7 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role("USER")
                 .phone(request.getPhone() == null ? null : request.getPhone().trim())
+                .city(trimToNull(request.getCity()))
                 .build();
         return userRepositry.save(user);
     }
@@ -94,11 +98,38 @@ public class UserService {
 
     // ✅ NAYA METHOD — profile update ke liye
     public UserEntity updateProfile(Long id, UserRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("Profile update is required");
+        }
         UserEntity user = userRepositry.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id : " + id));
-        if (request.getName() != null) user.setName(request.getName());
-        if (request.getPhone() != null) user.setPhone(request.getPhone());
+        if (request.getName() != null) {
+            String name = request.getName().trim();
+            if (name.isBlank() || name.length() > 100) {
+                throw new IllegalArgumentException("Name must contain 1 to 100 characters");
+            }
+            user.setName(name);
+        }
+        if (request.getPhone() != null) {
+            String phone = request.getPhone().trim();
+            if (phone.length() > 30) {
+                throw new IllegalArgumentException("Phone number exceeds the allowed length");
+            }
+            user.setPhone(trimToNull(phone));
+        }
+        if (request.getCity() != null) {
+            String city = request.getCity().trim();
+            if (city.length() > 120) {
+                throw new IllegalArgumentException("City exceeds the allowed length");
+            }
+            user.setCity(trimToNull(city));
+        }
         return userRepositry.save(user);
+    }
+
+    private String trimToNull(String value) {
+        if (value == null || value.isBlank()) return null;
+        return value.trim();
     }
 
 }

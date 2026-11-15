@@ -15,4 +15,5 @@ public class UserRequest {
     private String email;
     private String password;
     private String phone;
+    private String city;
 }

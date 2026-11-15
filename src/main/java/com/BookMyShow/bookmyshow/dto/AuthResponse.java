@@ -14,6 +14,7 @@ public class AuthResponse {
     private final String email;
     private final String role;
     private final String phone;
+    private final String city;
     private final LocalDateTime createAt;
     private final String accessToken;
     private final String tokenType;
@@ -25,6 +26,7 @@ public class AuthResponse {
                 user.getEmail(),
                 user.getRole(),
                 user.getPhone(),
+                user.getCity(),
                 user.getCreateAt(),
                 accessToken,
                 "Bearer"

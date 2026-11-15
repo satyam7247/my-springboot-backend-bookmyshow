@@ -31,6 +31,8 @@ public class UserEntity {
     private String role;
 
     private String phone;
+    @Column(length = 120)
+    private String city;
     private LocalDateTime createAt;
 
     @PrePersist
